@@ -1,5 +1,7 @@
 package info.davek.mhbot;
 
+import com.sun.istack.internal.Nullable;
+
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -11,7 +13,7 @@ public class Logger
 	// the file descriptor of our log
 	private static FileWriter fd = null;
 	// default name for the log file
-	private static String fname = "info.davek.monhun-bot.log";
+	private static String fname = "info.davek.mhbot.log";
 	// contains error information
 	private static String error = null;
 
@@ -67,12 +69,30 @@ public class Logger
 		Logger.error = error;
 	}
 
-	public void log(String fmt, Object...args)
+	/**
+	 * Format and write arguments to log.
+	 *
+	 * @param fmt       format string
+	 * @param args      format arguments (optional)
+	 */
+	public void write(String fmt, @Nullable Object...args)
 	{
 		try {
 			fd.append(String.format(fmt, args));
 		} catch(IOException e) {
 			setError(e.toString());
+		}
+	}
+
+	/**
+	 * Close the logging system, and release file handles.
+	 */
+	public void close()
+	{
+		try {
+			fd.close();
+		} catch(IOException e) {
+			e.printStackTrace();
 		}
 	}
 }
