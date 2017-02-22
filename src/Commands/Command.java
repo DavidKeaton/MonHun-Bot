@@ -1,4 +1,4 @@
-package info.davek.david.Commands;
+package info.davek.mhbot.Commands;
 
 import java.util.function.Consumer;
 

@@ -1,4 +1,4 @@
-package info.davek.david.Bot;
+package info.davek.mhbot.Bot;
 
 /**
  * Bot class, used to interact with Discord channel.

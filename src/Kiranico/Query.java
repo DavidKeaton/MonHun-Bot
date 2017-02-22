@@ -1,4 +1,4 @@
-package info.davek.david.Kiranico;
+package info.davek.mhbot.Kiranico;
 
 /**
  * Formats queries for Kiranico.

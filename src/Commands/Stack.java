@@ -1,4 +1,4 @@
-package info.davek.david.Commands;
+package info.davek.mhbot.Commands;
 
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class Stack
 	}
 
 	/**
-	 * Adds a function to the command queue.
+	 * Adds a function to the command stack.
 	 *
 	 * @param cmd       the command to add
 	 * @return          whether the command was successfully placed in stack
