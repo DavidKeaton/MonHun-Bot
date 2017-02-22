@@ -1,4 +1,4 @@
-package info.davek.david.MonHun;
+package info.davek.david.Bot;
 
 /**
  * Bot class, used to interact with Discord channel.
