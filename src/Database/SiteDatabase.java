@@ -5,6 +5,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
+ * TODO: return URL for given search - search()
+ * TODO: grab page contents from URL and send to info decipher
+ */
+
+/**
  * Represents connection to URL for database querying.
  */
 public abstract class SiteDatabase extends HttpURLConnection
@@ -40,7 +45,6 @@ public abstract class SiteDatabase extends HttpURLConnection
 		// update to the most recent query
 		this.lastQuery = query;
 
-		// TODO: return the URL for the given search
 		return "";
 	}
 
