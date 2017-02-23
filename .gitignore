@@ -16,6 +16,7 @@ hs_err_pid*
 # =========================
 .idea
 *.xml
+out/
 
 # =========================
 # Operating System Files
