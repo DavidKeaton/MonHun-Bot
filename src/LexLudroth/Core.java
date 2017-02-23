@@ -1,4 +1,4 @@
-package info.davek.mhbot.Commands;
+package info.davek.mhbot.LexLudroth;
 
 /**
  * Core commands used by our Discord bot.

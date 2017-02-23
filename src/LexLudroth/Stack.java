@@ -1,4 +1,4 @@
-package info.davek.mhbot.Commands;
+package info.davek.mhbot.LexLudroth;
 
 import java.util.HashMap;
 import java.util.ArrayList;
