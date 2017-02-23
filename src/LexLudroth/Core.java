@@ -7,7 +7,7 @@ public class Core
 {
 	private static final Command[] commands = {
 		new Command("help",
-		            "Display ",
+		            "Display information",
 		            null),
 
 		new Command("",
