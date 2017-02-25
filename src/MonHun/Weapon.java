@@ -3,10 +3,10 @@ package info.davek.mhbot.MonHun;
 /**
  * Represents a weapon in Monster Hunter.
  */
-public class Weapon
+public class Weapon extends Base
 {
-	// all types of weapons
-	public enum WEAPON_TYPE {
+	// list of weapon types
+	public enum TYPE {
 		GREAT_SWORD,
 		LONG_SWORD,
 		DUAL_BLADES,
@@ -22,7 +22,7 @@ public class Weapon
 	}
 
 	// what type of weapon is represented
-	private WEAPON_TYPE type;
+	private Weapon.TYPE type;
 
 	// power of weapon
 	private int power;
@@ -32,27 +32,47 @@ public class Weapon
 	private int sharpness;
 
 	/**
-	 * Only constructor for Weapon, requires all arguments.
+	 * Create a blank weapon.
+	 */
+	public Weapon()
+	{
+		super(Base.TYPE.WEAPON);
+	}
+
+	/**
+	 * Create a weapon of `type'.
 	 *
-	 * @param type      WEAPON_TYPE of weapon
+	 * @param type      Weapon.TYPE to create
+	 */
+	public Weapon(Weapon.TYPE type)
+	{
+		super.setType(Base.TYPE.WEAPON);
+		setWeaponType(type);
+	}
+
+	/**
+	 * Builder for Weapon, requires all arguments.
+	 *
+	 * @param type      Weapon.TYPE of weapon
 	 * @param element   @ref Element of weapon
 	 * @param power     raw power of weapon
 	 * @param sharpness sharpness of weapon, in numerical form
 	 */
-	public Weapon(WEAPON_TYPE type, Element element, int power, int sharpness)
+	public Weapon(Weapon.TYPE type, Element element, int power, int sharpness)
 	{
+		super.setType(Base.TYPE.WEAPON);
 		setWeaponType(type);
 		setElement(element);
 		setPower(power);
 		setSharpness(sharpness);
 	}
 
-	public WEAPON_TYPE getWeaponType()
+	public Weapon.TYPE getWeaponType()
 	{
 		return type;
 	}
 
-	public void setWeaponType(WEAPON_TYPE type)
+	public void setWeaponType(Weapon.TYPE type)
 	{
 		this.type = type;
 	}
@@ -87,11 +107,6 @@ public class Weapon
 		this.sharpness = sharpness;
 	}
 
-	/**
-	 * Convert an image representation of the sharpness bar into numbers
-	 *
-	 * @return      the numerical representation of the sharpness meter
-	 */
 	// TODO: convert sharpness meter image (pixel scan) into number values
 	private int convertSharpnessMeter(Object meter)
 	{

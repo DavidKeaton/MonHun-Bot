@@ -3,38 +3,40 @@ package info.davek.mhbot.MonHun;
 /**
  * Represents an elemental type or status in Monster Hunter.
  */
-public class Element
+public class Element extends Base
 {
-	public enum STATUS_TYPE {
+	// list of elements/statuses
+	public enum TYPE {
+		FIRE,
+		WATER,
+		ICE,
+		THUNDER,
+		DRAGON,
 		BLAST,
 		POISON,
 		SLEEP,
 		PARALYSIS,
 	}
 
-	public enum ELEMENT_TYPE {
-		FIRE,
-		WATER,
-		ICE,
-		THUNDER,
-		DRAGON,
-	}
-
-	// type of status, if present
-	private STATUS_TYPE status;
-	// type of element, if present
-	private ELEMENT_TYPE element;
+	// type of status/element, if present
+	private Element.TYPE type;
 	// amount of element/status applied on hit
 	private int amount;
 
-	public Element(STATUS_TYPE type, int amount)
+	public Element()
 	{
-		setStatus(type);
-		setAmount(amount);
+		super(Base.TYPE.ELEMENT);
 	}
 
-	public Element(ELEMENT_TYPE type, int amount)
+	public Element(Element.TYPE element)
 	{
+		super(Base.TYPE.ELEMENT);
+		setElement(element);
+	}
+
+	public Element(Element.TYPE type, int amount)
+	{
+		super(Base.TYPE.ELEMENT);
 		setElement(type);
 		setAmount(amount);
 	}
@@ -49,23 +51,13 @@ public class Element
 		this.amount = amount;
 	}
 
-	public STATUS_TYPE getStatus()
+	public Element.TYPE getElement()
 	{
-		return status;
+		return type;
 	}
 
-	public void setStatus(STATUS_TYPE status)
+	public void setElement(Element.TYPE element)
 	{
-		this.status = status;
-	}
-
-	public ELEMENT_TYPE getElement()
-	{
-		return element;
-	}
-
-	public void setElement(ELEMENT_TYPE element)
-	{
-		this.element = element;
+		this.type = element;
 	}
 }
