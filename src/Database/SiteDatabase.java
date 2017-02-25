@@ -16,6 +16,7 @@ public abstract class SiteDatabase extends HttpURLConnection
 {
 	// contains contents of last page scrape
 	private String screenBuffer;
+	// the last query that was made
 	private String lastQuery;
 
 	/**
@@ -28,11 +29,13 @@ public abstract class SiteDatabase extends HttpURLConnection
 		super(u);
 	}
 
-	// grab contents of page, and return it
-	protected String scrape(String path)
-	{
-		return "";
-	}
+	/**
+	 * Scrapes an URL path for its contents.
+	 *
+	 * @param path      the URL path (minus the domain)
+	 * @return
+	 */
+	abstract protected String scrape(String path);
 
 	/**
 	 * Searches through screenBuffer to find search `query'.
@@ -40,13 +43,7 @@ public abstract class SiteDatabase extends HttpURLConnection
 	 * @param query     the query to search the page for
 	 * @return          a link to the info on `query'
 	 */
-	public String search(String query)
-	{
-		// update to the most recent query
-		this.lastQuery = query;
-
-		return "";
-	}
+	abstract public String search(String query);
 
 	@Override
 	public void disconnect()
