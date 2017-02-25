@@ -16,6 +16,7 @@ public class Command
 
 	/**
 	 * Create named command `func', with command description.
+	 *
 	 * @param name      name of command
 	 * @param desc      description of command
 	 * @param func      the function to execute when executed
@@ -51,6 +52,11 @@ public class Command
 		return func;
 	}
 
+	/**
+	 * Execute given command with Object (or a derivative thereof) as an arg.
+	 *
+	 * @param arg       Object to be passed in [void *userdata] fashion
+	 */
 	public void accept(Object arg)
 	{
 		this.func.accept(arg);
