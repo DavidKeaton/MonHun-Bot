@@ -8,7 +8,7 @@ import java.net.URL;
  */
 public class Kiranico extends SiteDatabase
 {
-	private static final String BASE_URL = "http://mhgen.kiranico.com";
+	private static final String BASE_URL = "http://mhgen.kiranico.com/";
 
 	/**
 	 * Connect to given path on Kiranico.
@@ -18,9 +18,18 @@ public class Kiranico extends SiteDatabase
 	 */
 	public Kiranico(URL u) throws MalformedURLException
 	{
-		super(!u.toString().startsWith("http")
-			? new URL(BASE_URL
-					+ ((u.toString().startsWith("/")) ? "" : "/") + u) : u);
+		super(u);
+	}
+
+	/**
+	 * Connect to Kiranico site with `path' appended to URL.
+	 *
+	 * @param path      path to connect to
+	 * @throws MalformedURLException    invalid URL given!
+	 */
+	public Kiranico(String path) throws MalformedURLException
+	{
+		super(new URL(BASE_URL + path));
 	}
 
 	@Override
