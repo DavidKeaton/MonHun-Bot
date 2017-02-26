@@ -29,7 +29,10 @@ public class Kiranico extends SiteDatabase
 	 */
 	public Kiranico(String path) throws MalformedURLException
 	{
-		super(new URL(BASE_URL + path));
+		// fix any leading slashes in path
+		super(
+			new URL(BASE_URL + (!path.startsWith("/") ? "/" : "") + path)
+		);
 	}
 
 	@Override
