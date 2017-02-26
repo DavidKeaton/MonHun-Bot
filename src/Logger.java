@@ -5,6 +5,8 @@ import com.sun.istack.internal.Nullable;
 import java.io.FileWriter;
 import java.io.IOException;
 
+// TODO: implement usage of Logger in other packages/classes
+
 /**
  * Creates a logging instance for debugging/review purposes.
  */
@@ -78,7 +80,7 @@ public class Logger
 	public void write(String fmt, @Nullable Object...args)
 	{
 		try {
-			fd.append(String.format(fmt, args));
+			fd.append(String.format(fmt + "\n", args));
 		} catch(IOException e) {
 			setError(e.toString());
 		}
@@ -94,5 +96,21 @@ public class Logger
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * Dumps information regarding the logging system.
+	 *
+	 * @return      info on the current logging system
+	 */
+	@Override
+	public String toString()
+	{
+		StringBuilder str = new StringBuilder();
+		str.append("Logger{");
+		// current log file name
+		str.append(fname);
+		str.append("}");
+		return str.toString();
 	}
 }
