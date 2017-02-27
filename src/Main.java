@@ -33,10 +33,7 @@ public class Main
 
 	public static void main(String[] args)
 	{
-		// holds Kiranico connection
-		// print Log details
-		System.out.println(log.toString());
-		// quick test for SiteDatabase->Kiranico instantiation
+		// Kiranico->Monster->Deviljho [!!]
 		try(Kiranico kira = new Kiranico("/monster/deviljho")) {
 			kira.connect();
 			log.print("Kiranico Connected:\n%s", kira.toString());
@@ -44,6 +41,8 @@ public class Main
 		} catch(NullPointerException|IOException e) {
 			log.print(Log.LEVEL.ERROR, e.toString());
 		} finally {
+			// print Log details
+			System.out.println(log.toString());
 			log.close();
 		}
 	}
