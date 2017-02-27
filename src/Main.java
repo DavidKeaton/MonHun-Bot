@@ -2,6 +2,7 @@ package info.davek.mhbot;
 
 import info.davek.mhbot.Database.Kiranico;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 
 /**
@@ -37,9 +38,10 @@ public class Main
 		System.out.println(log.toString());
 		// quick test for SiteDatabase->Kiranico instantiation
 		try(Kiranico kira = new Kiranico("/monster/deviljho")) {
-			log.print("created Kiranico class: %s", kira.toString());
+			kira.connect();
+			log.print("Kiranico Connected:\n%s", kira.toString());
 			kira.disconnect();
-		} catch(NullPointerException|MalformedURLException e) {
+		} catch(NullPointerException|IOException e) {
 			log.print(Log.LEVEL.ERROR, e.toString());
 		} finally {
 			log.close();

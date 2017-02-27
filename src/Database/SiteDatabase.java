@@ -84,7 +84,7 @@ public abstract class SiteDatabase
 		this.buffer = buffer;
 	}
 
-	protected String getBuffer()
+	public String getBuffer()
 	{
 		return this.buffer;
 	}

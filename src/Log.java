@@ -90,24 +90,35 @@ public class Log
 	                  @Nullable Object...args)
 	{
 		try {
+			// logging prefixes by type
+			final String PREFIX = " DWEF";
+			// position inside PREFIX
+			int pos = 0;
 			// print log timestamp
 			fd.append(new SimpleDateFormat(LOGSTAMP).format(new Date()));
 			fd.append(" :");
 			// print severity, or nothing if
 			switch(level) {
-				case DEBUG:
-					fd.append("D");
-				case WARN:
-					fd.append("W");
-				case ERROR:
-					fd.append("E");
 				case FATAL:
-					fd.append("F");
+					++pos;
+				case ERROR:
+					++pos;
+				case WARN:
+					++pos;
+				case DEBUG:
+					++pos;
+			}
+			// write iff not space
+			char ch = PREFIX.charAt(pos);
+			if(ch == ' ') {
+				fd.append(ch);
 			}
 			fd.append(": ");
 			// write supplied format string and args
 			fd.append(String.format(fmt, args));
 			fd.append("\n");
+			// flush entries to log, and increment the amount of entries written
+			fd.flush();
 			++entriesWritten;
 		} catch(IOException|NullPointerException e) {
 			setError(e.toString());
