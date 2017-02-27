@@ -15,7 +15,7 @@ import java.util.Date;
 public class Log
 {
 	// SimpleDateFormat for logstamps
-	private static final String LOGSTAMP = "yyyy.MM.dd'@'HH:mm:ss.SSS";
+	private static final String LOGSTAMP = "yyyy.MM.dd'-'HH:mm:ss.SSS";
 
 	// the file descriptor of our log
 	private static FileWriter fd = null;
@@ -23,6 +23,8 @@ public class Log
 	private static String fname = "hunters.log";
 	// contains error information
 	private static String error = null;
+	// amount of log entries written
+	private static int entriesWritten = 0;
 
 	// LOG LEVELS
 	public enum LEVEL {
@@ -90,21 +92,23 @@ public class Log
 		try {
 			// print log timestamp
 			fd.append(new SimpleDateFormat(LOGSTAMP).format(new Date()));
-			fd.append(" - ");
+			fd.append(" :");
 			// print severity, or nothing if
 			switch(level) {
 				case DEBUG:
-					fd.append("D: ");
+					fd.append("D");
 				case WARN:
-					fd.append("W: ");
+					fd.append("W");
 				case ERROR:
-					fd.append("E: ");
+					fd.append("E");
 				case FATAL:
-					fd.append("F: ");
+					fd.append("F");
 			}
+			fd.append(": ");
 			// write supplied format string and args
 			fd.append(String.format(fmt, args));
 			fd.append("\n");
+			++entriesWritten;
 		} catch(IOException|NullPointerException e) {
 			setError(e.toString());
 		}
@@ -128,6 +132,7 @@ public class Log
 	{
 		try {
 			fd.close();
+			entriesWritten = 0;
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -141,6 +146,6 @@ public class Log
 	@Override
 	public String toString()
 	{
-		return "Log: " + fname;
+		return "Log: " + fname + " {" + entriesWritten + "}";
 	}
 }
