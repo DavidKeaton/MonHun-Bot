@@ -1,5 +1,7 @@
 package info.davek.mhbot.MonHun;
 
+import com.sun.istack.internal.Nullable;
+
 /**
  * Base attributes for Monster Hunter information classes.
  */
@@ -27,12 +29,18 @@ public abstract class Base
 		setType(null);
 	}
 
+	Base(String name)
+	{
+		setName(name);
+		setType(lookup(null));
+	}
+
 	/**
 	 * Basic initialization, only passing _type of class.
 	 *
 	 * @param type      type of object to be stored
 	 */
-	Base(TYPE type)
+	Base(Base.TYPE type)
 	{
 		setType(type);
 	}
@@ -43,7 +51,7 @@ public abstract class Base
 	 * @param type      type of object
 	 * @param name      name of object
 	 */
-	Base(TYPE type, String name)
+	Base(Base.TYPE type, String name)
 	{
 		setType(type);
 		setName(name);
@@ -56,7 +64,7 @@ public abstract class Base
 	 * @param type      type of object
 	 * @param id        ID of object
 	 */
-	Base(TYPE type, int id)
+	Base(Base.TYPE type, int id)
 	{
 		setType(type);
 		setId(id);
@@ -84,6 +92,24 @@ public abstract class Base
 	protected int getIdByName(String name)
 	{
 		return 0;
+	}
+
+	/**
+	 * Look up and return new MonHun.Base class representing `name'.
+	 *
+	 * @param name      name of weapon/item/monster/etc (optional, uses getName() otherwise)
+	 * @return          MonHun.Base class representing `name'
+	 */
+	protected Base.TYPE lookup(@Nullable String name)
+	{
+		// hardcoded lookup switch, based on either given name or assigned name
+		switch(((name == null) ? getName() : name).toLowerCase()) {
+		// TODO: fill this sumbitch out
+			case "deviljho":
+				return Base.TYPE.MONSTER;
+		}
+		// unable to find
+		return null;
 	}
 
 	public String getName()

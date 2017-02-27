@@ -9,6 +9,7 @@ import java.net.URL;
 /**
  * TODO: return URL for given search - search()
  * TODO: grab page contents from URL and send to info decipher
+ * TODO: base constructor capable of initializing itself based on simple query
  */
 
 /**
@@ -32,6 +33,19 @@ public abstract class SiteDatabase
 	{
 		super(u);
 	}
+
+	SiteDatabase(String query)
+	{
+		super(null);
+	}
+
+	/**
+	 * Craft URL for search query.
+	 *
+	 * @param query     what to search for
+	 * @return          uri representation as URL
+	 */
+	abstract URL search(String query);
 
 	@Override
 	public void disconnect()
