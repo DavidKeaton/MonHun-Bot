@@ -36,7 +36,6 @@ public class Main
 		// print Log details
 		System.out.println(log.toString());
 		// quick test for SiteDatabase->Kiranico instantiation
-		log.print("creating Kiranico class...");
 		try(Kiranico kira = new Kiranico("/monster/deviljho")) {
 			log.print("created Kiranico class: %s", kira.toString());
 			kira.disconnect();

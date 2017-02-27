@@ -8,6 +8,7 @@ import java.net.URL;
  */
 public class Kiranico extends SiteDatabase
 {
+	// TODO: refactor constructors to mask URL object creation
 	private static final String BASE_URL = "http://mhgen.kiranico.com/";
 
 	/**
