@@ -1,5 +1,7 @@
 package info.davek.mhbot.Database;
 
+import info.davek.mhbot.MonHun.Base;
+
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -12,38 +14,24 @@ import java.net.URL;
 /**
  * Represents connection to URL for database querying.
  */
-public abstract class SiteDatabase extends HttpURLConnection
+public abstract class SiteDatabase
+	extends HttpURLConnection
+	implements AutoCloseable
 {
 	// contains contents of last page scrape
-	private String screenBuffer;
-	// the last query that was made
-	private String lastQuery;
+	private String buffer;
+	// MonHun.Base class, to store information subclasses
+	private Base query;
 
 	/**
 	 * Constructor for the HttpURLConnection.
 	 *
 	 * @param u the URL
 	 */
-	protected SiteDatabase(URL u)
+	SiteDatabase(URL u)
 	{
 		super(u);
 	}
-
-	/**
-	 * Scrapes an URL path for its contents.
-	 *
-	 * @param path      the URL path (minus the domain)
-	 * @return
-	 */
-	abstract protected String scrape(String path);
-
-	/**
-	 * Searches through screenBuffer to find search `query'.
-	 *
-	 * @param query     the query to search the page for
-	 * @return          a link to the info on `query'
-	 */
-	abstract public String search(String query);
 
 	@Override
 	public void disconnect()
@@ -71,9 +59,41 @@ public abstract class SiteDatabase extends HttpURLConnection
 			// is there anything on the page?
 			if(getContentLength() > 0) {
 				// get the contents of the screen stored in cache
-				screenBuffer = (String)getContent();
+				setBuffer(getContent().toString());
 			}
 		}
+		close();
+	}
+
+	protected void setBuffer(String buffer)
+	{
+		this.buffer = buffer;
+	}
+
+	protected String getBuffer()
+	{
+		return this.buffer;
+	}
+
+	public Base getQuery()
+	{
+		return query;
+	}
+
+	public void setQuery(Base query)
+	{
+		this.query = query;
+	}
+
+	@Override
+	public void close()
+	{
 		disconnect();
+	}
+
+	@Override
+	public String toString()
+	{
+		return super.toString() + "\n\n" + getBuffer();
 	}
 }

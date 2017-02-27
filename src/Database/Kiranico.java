@@ -34,16 +34,4 @@ public class Kiranico extends SiteDatabase
 			new URL(BASE_URL + (!path.startsWith("/") ? "/" : "") + path)
 		);
 	}
-
-	@Override
-	protected String scrape(String path)
-	{
-		return null;
-	}
-
-	@Override
-	public String search(String query)
-	{
-		return null;
-	}
 }
