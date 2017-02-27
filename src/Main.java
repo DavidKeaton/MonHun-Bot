@@ -1,10 +1,8 @@
-package info.davek.mhbot.Bot;
+package info.davek.mhbot;
 
 import info.davek.mhbot.Database.Kiranico;
-import info.davek.mhbot.Logger;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 
 /**
  * Discord bot for Monster Hunter resource querying via chat commands.
@@ -21,29 +19,29 @@ import java.net.URL;
  *  - added caching system
  *  - created templates for monhun info (Monster, Item, Weapon, etc)
  *  - abstracted class for site database searching
+ *
+ *  @since 2.26.17
+ *  - better log support
+ *  - improvements on SiteDatabase class
+ *  - class renaming (Logger->Log, Bot.Bot->Main)
  */
-public class Bot
+public class Main
 {
 	// universal instance of the logger
-	public static Logger log = new Logger();
+	public static Log log = new Log();
 
 	public static void main(String[] args)
 	{
 		// holds Kiranico connection
-		Kiranico kira = null;
-		// print Logger details
+		// print Log details
 		System.out.println(log.toString());
 		// quick test for SiteDatabase->Kiranico instantiation
-		try {
-			log.write("creating Kiranico class...");
-			kira = new Kiranico("/monster/deviljho");
-			// dump reference to Kiranico class
-			System.out.println(kira.toString());
-			log.write("created Kiranico class: %s", kira.toString());
+		log.print("creating Kiranico class...");
+		try(Kiranico kira = new Kiranico("/monster/deviljho")) {
+			log.print("created Kiranico class: %s", kira.toString());
 			kira.disconnect();
-			log.write("disconnected from: %s", kira.getURL());
 		} catch(NullPointerException|MalformedURLException e) {
-			System.err.println(e.toString());
+			log.print(Log.LEVEL.ERROR, e.toString());
 		} finally {
 			log.close();
 		}
